@@ -199,7 +199,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--c
 .reply-cancel{background:none;border:none;color:var(--ink3);font-size:18px;cursor:pointer;flex-shrink:0;line-height:1}
 
 /* @mention autocomplete */
-#mention-list{position:fixed;bottom:66px;left:12px;right:12px;
+#mention-list{position:fixed;bottom:calc(68px + env(safe-area-inset-bottom,0px));left:12px;right:12px;
   background:rgba(255,255,255,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border:1px solid var(--bord2);border-radius:var(--rlg);padding:6px;
   display:none;flex-direction:column;gap:2px;z-index:250;box-shadow:0 4px 24px rgba(26,26,24,.12)}
@@ -210,41 +210,53 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--c
 .mention-av{width:28px;height:28px;border-radius:50%;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
 /* ── INPUT BAR ── */
-#cib{padding:7px 10px 9px;background:rgba(250,248,245,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-top:1px solid var(--border);display:flex;align-items:center;gap:5px;flex-shrink:0}
-#ci{flex:1;min-width:0;background:var(--white);border:1.5px solid var(--bord2);border-radius:20px;
-  padding:8px 13px;color:var(--ink);font-family:-apple-system,sans-serif;
+#cib{
+  padding:8px 12px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));
+  background:rgba(250,248,245,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid var(--border);display:flex;align-items:center;gap:6px;flex-shrink:0;
+}
+#ci{
+  flex:1;min-width:0;background:var(--white);border:1.5px solid var(--bord2);border-radius:22px;
+  padding:10px 14px;color:var(--ink);font-family:-apple-system,sans-serif;
   font-size:16px;font-weight:500;outline:none;
   transition:border-color .2s,box-shadow .2s;box-shadow:var(--s1);
-  -webkit-user-select:text;user-select:text}
+  -webkit-user-select:text;user-select:text;
+}
 #ci:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(196,168,130,.15)}
 #ci::placeholder{color:var(--ink3)}
-.ib{width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink3);
+.ib{width:38px;height:38px;border-radius:50%;border:none;background:transparent;color:var(--ink3);
   display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0}
 .ib:hover,.ib.active{color:var(--olive);background:var(--olive-l)}
 .ib:active{transform:scale(.9)}
-#sb{width:34px;height:34px;border-radius:50%;border:none;background:var(--olive);color:#fff;
+#sb{width:38px;height:38px;border-radius:50%;border:none;background:var(--olive);color:#fff;
   display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;
   box-shadow:0 2px 10px rgba(92,107,74,.35);transition:transform .1s}
 #sb:active{transform:scale(.9)}
 
-/* mic button — hold to record */
-#mic-btn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink3);
+/* mic button */
+#mic-btn{width:38px;height:38px;border-radius:50%;border:none;background:transparent;color:var(--ink3);
   display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0;
-  user-select:none;-webkit-user-select:none}
+  user-select:none;-webkit-user-select:none;touch-action:none}
 #mic-btn.recording{background:var(--red);color:#fff;box-shadow:0 0 0 4px rgba(217,79,79,.2);animation:recPulse 1s ease-in-out infinite}
 @keyframes recPulse{0%,100%{box-shadow:0 0 0 4px rgba(217,79,79,.2)}50%{box-shadow:0 0 0 8px rgba(217,79,79,.1)}}
 
 /* recording overlay */
-#rec-overlay{position:fixed;bottom:66px;left:0;right:0;background:rgba(217,79,79,.95);
-  color:#fff;padding:12px 20px;display:none;align-items:center;justify-content:center;gap:10px;
-  font-size:13px;font-weight:700;z-index:300;backdrop-filter:blur(10px)}
+#rec-overlay{
+  position:fixed;bottom:0;left:0;right:0;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:rgba(217,79,79,.95);
+  color:#fff;padding-top:14px;padding-left:20px;padding-right:20px;
+  display:none;align-items:center;justify-content:center;gap:10px;
+  font-size:13px;font-weight:700;z-index:300;backdrop-filter:blur(10px);}
 #rec-overlay.show{display:flex}
 .rec-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:recPulse 1s infinite}
 #rec-time{font-family:monospace;font-size:15px;font-weight:800;letter-spacing:1px}
 
 /* attach */
-#apm{position:fixed;bottom:66px;left:12px;background:rgba(255,255,255,.97);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+#apm{
+  position:fixed;bottom:calc(68px + env(safe-area-inset-bottom,0px));left:12px;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
   border:1px solid var(--bord2);border-radius:var(--rlg);padding:7px;display:none;flex-direction:column;gap:2px;
   z-index:200;box-shadow:0 4px 24px rgba(26,26,24,.12);min-width:178px}
 #apm.show{display:flex}
@@ -475,6 +487,34 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--c
 .md-action:hover{border-color:var(--olive);color:var(--olive);background:var(--olive-l)}
 .md-action:active{transform:scale(.96)}
 
+/* ── ADMIN PANEL ── */
+#admin-panel{
+  display:none;position:fixed;inset:0;z-index:600;background:var(--cream);flex-direction:column;overflow:hidden;
+}
+#admin-panel.show{display:flex}
+.admin-hdr{background:rgba(250,248,245,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.admin-back{width:32px;height:32px;border-radius:50%;background:var(--beige);border:none;color:var(--ink2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:15px;font-weight:700}
+.admin-title{font-size:15px;font-weight:800;color:var(--ink)}
+.admin-body{flex:1;overflow-y:auto;padding:16px;-webkit-overflow-scrolling:touch}
+.admin-body::-webkit-scrollbar{width:0}
+.admin-section{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink3);
+  margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.admin-section::after{content:'';flex:1;height:1px;background:var(--bord2)}
+.user-row{background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:11px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;box-shadow:var(--s1)}
+.user-row-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0;border:1.5px solid var(--border)}
+.user-row-info{flex:1;min-width:0}
+.user-row-name{font-size:14px;font-weight:700;color:var(--ink)}
+.user-row-meta{font-size:11px;font-weight:500;color:var(--ink3);margin-top:2px}
+.del-btn{background:var(--red-l);border:1.5px solid rgba(217,79,79,.25);border-radius:var(--rsm);
+  padding:6px 12px;color:var(--red);font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;
+  font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
+.del-btn:active{transform:scale(.95);background:rgba(217,79,79,.2)}
+.admin-note{background:var(--beige);border-radius:var(--rsm);padding:12px 14px;
+  font-size:12px;font-weight:500;color:var(--ink3);line-height:1.5;margin-bottom:14px;border:1px solid var(--border)}
+
 /* context menu */
 #ctx-menu{position:fixed;z-index:600;background:rgba(255,255,255,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   border:1px solid var(--bord2);border-radius:var(--r);padding:6px;box-shadow:0 8px 32px rgba(26,26,24,.18);display:none;min-width:155px}
@@ -564,7 +604,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--c
     <div><div class="hdr-name">Combo Magrebi</div><div class="hdr-sub" id="hdr-sub">Conectando…</div></div>
   </div>
   <div class="hdr-right">
-    <button class="mute-btn" id="mute-btn" onclick="toggleMute()" title="Silenciar">🔔</button>
+    <button class="mute-btn" id="notif-btn" onclick="requestNotifPermission()" title="Activar notificaciones">🔔</button>
+    <button class="mute-btn" id="mute-btn" onclick="toggleMute()" title="Silenciar">🔇</button>
+    <button class="mute-btn" onclick="openAdmin()" title="Admin" style="font-size:13px">⚙️</button>
     <div class="online-pill"><div class="odot"></div><span id="oc">–</span></div>
   </div>
 </div>
@@ -641,6 +683,19 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--c
       <button class="sbtn sbtn-sec" onclick="closeMom()">Cancelar</button>
       <button class="sbtn sbtn-ok" onclick="saveMoment()">Guardar</button>
     </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-hdr">
+    <button class="admin-back" onclick="closeAdmin()">←</button>
+    <div class="admin-title">⚙️ Gestión de usuarios</div>
+  </div>
+  <div class="admin-body">
+    <div class="admin-note">Solo tú puedes ver esto. Elimina usuarios duplicados o cuentas que no sean del grupo. La acción es irreversible.</div>
+    <div class="admin-section">Usuarios registrados</div>
+    <div id="admin-user-list"><div style="text-align:center;padding:20px;color:var(--ink3);font-size:13px">Cargando…</div></div>
   </div>
 </div>
 
@@ -990,7 +1045,7 @@ function sendNotif(d,isMention){
   if(!('Notification' in window)||Notification.permission!=='granted')return;
   const title=isMention?`${d.author} te mencionó 👋`:`${d.author} en Combo Magrebi`;
   const body=d.type==='image'?'📸 Imagen':d.type==='audio'?'🎤 Audio':d.text||'Nuevo mensaje';
-  try{new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🫂</text></svg>'});}catch(e){}
+  try{new Notification(title,{body});}catch(e){}
 }
 
 function toggleMute(){
@@ -999,6 +1054,30 @@ function toggleMute(){
   btn.textContent=muted?'🔕':'🔔';
   btn.classList.toggle('muted',muted);
   showToast(muted?'Notificaciones silenciadas':'Notificaciones activadas');
+}
+
+async function requestNotifPermission(){
+  if(!('Notification' in window)){showToast('Tu navegador no soporta notificaciones');return;}
+  if(Notification.permission==='granted'){showToast('✅ Notificaciones ya activadas');return;}
+  const perm=await Notification.requestPermission();
+  if(perm==='granted'){
+    showToast('✅ Notificaciones activadas');
+    // test notification
+    try{new Notification('Combo Magrebi 🫂',{body:'Las notificaciones funcionan correctamente'});}catch(e){}
+  } else if(perm==='denied'){
+    showToast('Actívalas en Ajustes del móvil');
+    openNotifHelp();
+  } else {
+    showToast('Permiso no concedido');
+  }
+}
+
+function openNotifHelp(){
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  const msg=isIOS
+    ?'En iPhone: la app debe estar instalada en pantalla de inicio (Safari → Compartir → Añadir a pantalla de inicio). Luego ve a Ajustes → Combo Magrebi → Notificaciones.'
+    :'En Android: ve a Ajustes del navegador → Notificaciones del sitio → Permitir.';
+  alert(msg);
 }
 
 function updBadge(){
@@ -1035,7 +1114,7 @@ function renderMsg(d,key,instant){
   let content='';
   if(d.type==='image')content=`<img class="msg-img" src="${d.img}" onclick="openLB('${d.img}')">`;
   else if(d.type==='video')content=`<div class="msg-video-wrap"><video controls src="${d.media}"></video></div>`;
-  else if(d.type==='audio')content=buildAudioBubble(d.media,isMine);
+  else if(d.type==='audio')content=buildAudioBubble(d.media,isMine,d.dur);
   else if(d.type==='file')content=`<div style="font-size:13px;font-weight:600">📎 ${esc(d.fileName||'archivo')}</div>`;
   else content=formatText(esc(d.text||''),isMine);
 
@@ -1125,7 +1204,10 @@ function nowT(){const d=new Date();return d.getHours()+':'+String(d.getMinutes()
 
 function sendMsg(){
   const inp=document.getElementById('ci');const text=inp.value.trim();if(!text)return;
-  inp.value='';closeAll();hideMentions();
+  inp.value='';
+  // keep focus so keyboard stays open on mobile
+  setTimeout(()=>inp.focus(),50);
+  closeAll();hideMentions();
   const data={type:'text',text,author:ME.name,avatar:ME.avatar,color:ME.color,bg:ME.bg,time:nowT(),ts:Date.now()};
   if(replyTo){data.replyTo=replyTo;cancelReply();}
   pushMsg(data);
@@ -1148,24 +1230,38 @@ function handleMedia(input,type){
 // ════════════════════════════
 // RECORD AUDIO
 // ════════════════════════════
+function getSupportedMimeType(){
+  const types=['audio/mp4','audio/aac','audio/webm;codecs=opus','audio/webm','audio/ogg'];
+  for(const t of types){if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))return t;}
+  return '';
+}
+
 async function startRec(e){
-  if(e)e.preventDefault();
+  if(e){e.preventDefault();e.stopPropagation();}
   if(mediaRecorder)return;
   try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    mediaRecorder=new MediaRecorder(stream);recChunks=[];recSeconds=0;
-    mediaRecorder.ondataavailable=ev=>{if(ev.data.size>0)recChunks.push(ev.data);};
-    mediaRecorder.onstop=()=>{
-      const blob=new Blob(recChunks,{type:'audio/webm'});
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,sampleRate:44100}});
+    const mimeType=getSupportedMimeType();
+    const opts=mimeType?{mimeType}:{};
+    mediaRecorder=new MediaRecorder(stream,opts);
+    recChunks=[];recSeconds=0;
+    mediaRecorder.ondataavailable=ev=>{if(ev.data&&ev.data.size>0)recChunks.push(ev.data);};
+    mediaRecorder.onstop=async()=>{
+      const finalType=mediaRecorder.mimeType||mimeType||'audio/webm';
+      const blob=new Blob(recChunks,{type:finalType});
+      const duration=recSeconds; // use timer as duration (accurate)
       const reader=new FileReader();
-      reader.onload=e=>{
-        pushMsg({type:'audio',media:e.target.result,author:ME.name,avatar:ME.avatar,color:ME.color,bg:ME.bg,time:nowT(),ts:Date.now()});
+      reader.onload=ev=>{
+        const durStr=duration>=60
+          ?Math.floor(duration/60)+':'+(duration%60<10?'0':'')+duration%60
+          :'0:'+(duration<10?'0':'')+duration;
+        pushMsg({type:'audio',media:ev.target.result,dur:durStr,author:ME.name,avatar:ME.avatar,color:ME.color,bg:ME.bg,time:nowT(),ts:Date.now()});
       };
       reader.readAsDataURL(blob);
       stream.getTracks().forEach(t=>t.stop());
       mediaRecorder=null;
     };
-    mediaRecorder.start();
+    mediaRecorder.start(200); // collect chunks every 200ms for smoother
     document.getElementById('mic-btn').classList.add('recording');
     document.getElementById('rec-overlay').classList.add('show');
     recTimer=setInterval(()=>{
@@ -1173,31 +1269,58 @@ async function startRec(e){
       const m=Math.floor(recSeconds/60),s=recSeconds%60;
       document.getElementById('rec-time').textContent=m+':'+(s<10?'0':'')+s;
     },1000);
-  }catch(err){showToast('Sin acceso al micrófono');mediaRecorder=null;}
+  }catch(err){
+    showToast('Sin acceso al micrófono');
+    mediaRecorder=null;
+  }
 }
+
 function stopRec(e){
-  if(e)e.preventDefault();
+  if(e){e.preventDefault();e.stopPropagation();}
   if(!mediaRecorder)return;
-  clearInterval(recTimer);recSeconds=0;
+  clearInterval(recTimer);
   document.getElementById('mic-btn').classList.remove('recording');
   document.getElementById('rec-overlay').classList.remove('show');
   document.getElementById('rec-time').textContent='0:00';
   if(mediaRecorder.state!=='inactive')mediaRecorder.stop();
 }
 
-// audio playback bubbles
-function buildAudioBubble(src){
+// audio playback bubbles — use real duration from data
+function buildAudioBubble(src,isMine,dur){
   const id='w'+Date.now();let bars='';
   for(let i=0;i<24;i++)bars+=`<div class="wb" style="height:${6+Math.random()*13}px"></div>`;
   const ae=src?`<audio id="a-${id}" src="${src}" style="display:none"></audio>`:'';
-  return `<div class="msg-audio">${ae}<button class="apb" onclick="animW(this,'${id}')">▶</button><div class="awv" id="${id}">${bars}</div><span class="adur">0:${String(Math.floor(3+Math.random()*25)).padStart(2,'0')}</span></div>`;
+  const durLabel=dur||'0:00';
+  return `<div class="msg-audio">${ae}<button class="apb" onclick="animW(this,'${id}')">▶</button><div class="awv" id="${id}">${bars}</div><span class="adur" id="dur-${id}">${durLabel}</span></div>`;
 }
 function animW(btn,id){
   const wave=document.getElementById(id),aud=document.getElementById('a-'+id);
-  if(btn.dataset.p==='1'){btn.dataset.p='0';btn.textContent='▶';if(aud)aud.pause();wave&&wave.querySelectorAll('.wb').forEach(b=>b.classList.remove('active'));return;}
-  btn.dataset.p='1';btn.textContent='⏸';if(aud){try{aud.currentTime=0;aud.play();}catch(err){}}
-  if(!wave)return;const bars=wave.querySelectorAll('.wb');let i=0;
-  const iv=setInterval(()=>{bars.forEach(b=>b.classList.remove('active'));if(i<bars.length)bars[i].classList.add('active');i++;if(i>=bars.length){clearInterval(iv);btn.textContent='▶';btn.dataset.p='0';}},120);
+  const durEl=document.getElementById('dur-'+id);
+  if(btn.dataset.p==='1'){
+    btn.dataset.p='0';btn.textContent='▶';
+    if(aud)aud.pause();
+    wave&&wave.querySelectorAll('.wb').forEach(b=>b.classList.remove('active'));
+    return;
+  }
+  btn.dataset.p='1';btn.textContent='⏸';
+  if(aud){
+    try{aud.currentTime=0;aud.play();}catch(err){}
+    // update duration display from actual audio
+    aud.onloadedmetadata=()=>{
+      if(durEl&&aud.duration&&isFinite(aud.duration)){
+        const t=Math.round(aud.duration);
+        durEl.textContent=(t>=60?Math.floor(t/60)+':'+(t%60<10?'0':'')+t%60:'0:'+(t<10?'0':'')+t);
+      }
+    };
+  }
+  if(!wave)return;
+  const bars=wave.querySelectorAll('.wb');let i=0;
+  const iv=setInterval(()=>{
+    bars.forEach(b=>b.classList.remove('active'));
+    if(i<bars.length)bars[i].classList.add('active');
+    i++;
+    if(i>=bars.length){clearInterval(iv);btn.textContent='▶';btn.dataset.p='0';}
+  },120);
 }
 
 // ════════════════════════════
@@ -1522,20 +1645,70 @@ function ansT(idx,el){const q=tQs[tIdx];document.querySelectorAll('.topt').forEa
 function nextT(){tIdx++;document.getElementById('tqn').textContent=Math.min(tIdx+1,5);renderT();}
 
 const retos=[
-  ['Moussa','Mandar un mensaje de texto. Solo texto. Sin audio.'],
-  ['Karim','Llegar puntual a la próxima quedada. Sin excusas.'],
-  ['Otmane','Responder el próximo mensaje en menos de 1 hora.'],
-  ['Imad','Usar más de 3 palabras en su próxima respuesta.'],
-  ['Hamza','Organizar un plan que realmente se lleve a cabo.'],
-  ['Youssef','No escribir nada en el grupo durante 24 horas.'],
-  ['Amine','Hacer una foto de grupo sin que nadie pose.'],
-  ['Karim','Pagar una ronda sin que nadie se lo pida.'],
-  ['El grupo entero','Contestar todos en menos de 5 minutos al próximo mensaje.'],
-  ['El primero en leer','Llamar por voz a alguien del grupo ahora mismo.'],
-  ['Moussa','Responder algo sin audio. Tú puedes.'],
-  ['El último en escribir','Mandar una foto actual. Donde estés ahora mismo.']
+  ['El último en leer','Llama por voz a alguien del grupo ahora mismo. Sin excusa.'],
+  ['El que más tarda en responder','Manda una foto tuya ahora mismo. Donde estés. Sin filtro.'],
+  ['El más callado esta semana','Escribe un mensaje de voz de al menos 1 minuto contando algo que nunca has contado.'],
+  ['El primero en abrir este mensaje','Tienes que pagar la próxima ronda. Sin rechistar.'],
+  ['Alguien elegido por la ruleta','Escribe el nombre de la persona que más te gusta ahora mismo. En el grupo.'],
+  ['El que menos emojis usa','Manda un audio imitando a alguien del grupo. El grupo adivina quién es.'],
+  ['El más dramático','Tienes que hacer el plan que llevas meses posponiendo. Esta semana.'],
+  ['El que más audios manda','Responde todo por texto durante 24 horas. Sin un solo audio.'],
+  ['El que llega siempre tarde','Llega puntual a la próxima quedada o paga dos rondas.'],
+  ['El fantasma del grupo','Tienes que iniciar conversación tú primero durante 3 días seguidos.'],
+  ['El que siempre cancela planes','Organiza tú el próximo plan. Y llevas a cabo. Sin cancelar.'],
+  ['El que más mira sin responder','Responde a los últimos 5 mensajes que dejaste en visto.'],
+  ['El más serio del grupo','Manda un meme. El peor que tengas. Ahora.'],
+  ['El que nunca paga','La próxima vez que salgáis invitas tú sin que te lo pidan.'],
+  ['El grupo entero','Todos tienen que mandar una foto de dónde están ahora mismo en los próximos 5 minutos.'],
+  ['El que más se queja','Un día entero sin quejarse de nada. El grupo vigila.'],
 ];
-function genReto(){const r=retos[Math.floor(Math.random()*retos.length)];document.getElementById('reto-t').innerHTML=`<strong>${r[0]}</strong>`;document.getElementById('reto-d').textContent=r[1];}
+
+function genReto(){
+  const r=retos[Math.floor(Math.random()*retos.length)];
+  document.getElementById('reto-t').innerHTML=`<strong>${r[0]}</strong>`;
+  document.getElementById('reto-d').textContent=r[1];
+}
+
+// ════════════════════════════
+// ADMIN — gestión usuarios
+// ════════════════════════════
+async function openAdmin(){
+  document.getElementById('admin-panel').classList.add('show');
+  const list=document.getElementById('admin-user-list');
+  list.innerHTML='<div style="text-align:center;padding:20px;color:var(--ink3);font-size:13px">Cargando…</div>';
+  if(!window._db){list.innerHTML='<div style="text-align:center;padding:20px;color:var(--ink3)">Sin conexión</div>';return;}
+  const snap=await window._get(window._ref(window._db,'users'));
+  const data=snap.val();
+  if(!data){list.innerHTML='<div style="text-align:center;padding:20px;color:var(--ink3);font-size:13px">No hay usuarios registrados</div>';return;}
+  list.innerHTML='';
+  Object.entries(data).forEach(([key,u])=>{
+    const isMe=u.name===ME.name;
+    const av=u.avatar||'👤';const isBig=av.length<=2&&isNaN(av);
+    const created=u.created?new Date(u.created).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'}):'–';
+    const row=document.createElement('div');row.className='user-row';row.id='urow-'+key;
+    row.innerHTML=`
+      <div class="user-row-av" style="background:${bFor(u.name)};color:${cFor(u.name)};font-size:${isBig?'20':'13'}px">${av}</div>
+      <div class="user-row-info">
+        <div class="user-row-name">${esc(u.name||key)}${isMe?' <span style="font-size:10px;color:var(--olive);font-weight:600">(tú)</span>':''}</div>
+        <div class="user-row-meta">Registrado el ${created}</div>
+      </div>
+      ${!isMe?`<button class="del-btn" onclick="deleteUser('${key}','${esc(u.name||key)}')">Eliminar</button>`:'<span style="font-size:11px;font-weight:600;color:var(--ink3);flex-shrink:0">Tu cuenta</span>'}`;
+    list.appendChild(row);
+  });
+}
+
+async function deleteUser(key,name){
+  if(!confirm(`¿Eliminar a ${name}? Esta acción no se puede deshacer.`))return;
+  try{
+    await window._remove(window._ref(window._db,'users/'+key));
+    // also remove presence
+    try{await window._remove(window._ref(window._db,'presence/'+key));}catch(e){}
+    const row=document.getElementById('urow-'+key);if(row)row.remove();
+    showToast(`${name} eliminado`);
+  }catch(e){showToast('Error al eliminar');}
+}
+
+function closeAdmin(){document.getElementById('admin-panel').classList.remove('show');}
 </script>
 </body>
 </html>
